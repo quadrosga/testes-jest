@@ -1,10 +1,28 @@
+import { useState } from "react";
+
 function App() {
+  const [tarefas, setTarefas] = useState([]);
+  const [tarefaTemp, setTarefaTemp] = useState("");
+
+  function cadastrarTarefa() {
+    setTarefas([...tarefas, tarefaTemp]);
+    setTarefaTemp("");
+  }
+
   return (
     <div className="App">
-      <input type="text" />
-      <button type="button">cadastrar</button>
+      <input
+        type="text"
+        value={tarefaTemp}
+        onChange={(evento) => setTarefaTemp(evento.target.value)}
+      />
+      <button type="button" onClick={cadastrarTarefa}>
+        cadastrar
+      </button>
       <ul>
-        <li>estudar typescript</li>
+        {tarefas.map((tarefa) => (
+          <li>{tarefa}</li>
+        ))}
       </ul>
     </div>
   );
